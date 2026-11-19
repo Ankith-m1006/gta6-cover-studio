@@ -1,5 +1,10 @@
 [
-  { "name": "1-cover.jpg", "query": "?shot=cover&photo=pier&caption=Sunset%20Heist", "w": 1080, "h": 1080 },
-  { "name": "2-editor.jpg", "query": "?shot=editor&photo=boulevard&caption=Boulevard%20Queen", "w": 1280, "h": 720 },
-  { "name": "3-cover.jpg", "query": "?shot=cover&photo=boulevard&caption=Boulevard%20Queen", "w": 1080, "h": 1080 }
+  { "name": "1-cover-wide.jpg", "kind": "cover", "size": "wide", "fit": [1280, 720],
+    "query": "?shot=cover&size=wide&layout=mosaic&grade=sunset&photos=boulevard,pier&caption=Sunset%20Hustle&tagline=Ocean%20Drive&footer=Coming%20soon" },
+  { "name": "2-editor.jpg", "kind": "editor", "viewport": [1280, 800],
+    "query": "?shot=editor&size=wide&layout=hero&grade=neon&photos=boulevard,pier&caption=Neon%20Nights&tagline=Palm%20Coast&footer=Out%20now&select=1" },
+  { "name": "3-cover-portrait.jpg", "kind": "cover", "size": "portrait", "fit": [1024, 1280],
+    "query": "?shot=cover&size=portrait&layout=mosaic&grade=neon&photos=boulevard&caption=Neon%20Nights&tagline=Palm%20Coast&footer=Out%20now" },
+  { "name": "4-cover-square.jpg", "kind": "cover", "size": "square", "fit": [1080, 1080],
+    "query": "?shot=cover&size=square&layout=hero&grade=vhs&photos=pier,boulevard&caption=Pier%20Pressure&tagline=Summer%2086&footer=Rewind%20me" }
 ]

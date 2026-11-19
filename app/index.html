@@ -3,20 +3,87 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cover Snap</title>
+<title>Sunset Grid · cover studio</title>
 <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-<main class="app">
-  <section class="controls">
-    <h1>Cover Snap</h1>
-    <p>A photo and a caption, made into a square cover.</p>
-    <label>Photo <input id="photo" type="file" accept="image/*"></label>
-    <label>Caption <input id="caption" type="text" maxlength="40" value="Sunset Heist"></label>
-    <button id="export" type="button">Export PNG 1080 x 1080</button>
-    <p id="status" role="status"></p>
+<header class="topbar">
+  <div class="brand"><span class="brand-mark">SG</span><span><b>Sunset Grid</b><small>multi-panel cover studio</small></span></div>
+  <div class="sizes" id="sizeButtons" role="group" aria-label="Cover size"></div>
+  <div class="export">
+    <button id="exportBtn" class="cta" type="button">Export PNG</button>
+    <button id="exportAllBtn" class="ghost" type="button" title="Download 1920×1080, 1080×1080 and 1080×1350">All 3 sizes</button>
+  </div>
+</header>
+
+<main class="workspace">
+  <aside class="sidebar left">
+    <section class="step" id="stepPhotos">
+      <h2><i>1</i> Photos <small id="photoCount">none yet</small></h2>
+      <label class="dropzone" for="photoInput"><b>+ Add photos</b><span>or drop them anywhere · stays on this computer</span></label>
+      <input id="photoInput" type="file" accept="image/*" multiple hidden>
+      <div id="photoList" class="thumbs"></div>
+      <button id="sampleBtn" class="link" type="button">No photo handy? Use the two samples</button>
+    </section>
+    <section class="step">
+      <h2><i>2</i> Layout</h2>
+      <div id="layoutList" class="layout-grid"></div>
+      <label class="row">Gutter <input id="gutter" type="range" min="0.004" max="0.03" step="0.001"></label>
+      <label class="row">Frame
+        <select id="frame"><option value="dark">Dark</option><option value="white">White</option></select>
+      </label>
+    </section>
+    <section class="step">
+      <h2><i>3</i> Colour grade</h2>
+      <div id="gradeList" class="grade-list"></div>
+      <label class="row">Strength <input id="gradeStrength" type="range" min="0" max="1.3" step="0.05"></label>
+    </section>
+  </aside>
+
+  <section class="stage" id="stage">
+    <div class="canvas-wrap">
+      <canvas id="preview" aria-label="Live preview of the cover"></canvas>
+      <div class="empty-stage" id="emptyStage">
+        <button id="stageAdd" class="cta big" type="button">+ Add a photo</button>
+        <p>One photo fills every panel. Add more and they share the grid.</p>
+      </div>
+    </div>
+    <p class="hint"><b>Click</b> a panel to select it · <b>drag</b> to move its photo · <b>scroll</b> to zoom · <b>double-click</b> to reset</p>
   </section>
-  <canvas id="cover" width="1080" height="1080" aria-label="The cover"></canvas>
+
+  <aside class="sidebar right">
+    <section class="step">
+      <h2><i>4</i> Caption</h2>
+      <label>Title <textarea id="caption" rows="2" maxlength="60" spellcheck="false"></textarea></label>
+      <div class="two">
+        <label>Script tagline <input id="tagline" type="text" maxlength="32"></label>
+        <label>Footer <input id="footer" type="text" maxlength="40"></label>
+      </div>
+      <div class="two">
+        <label>Lettering <select id="lettering"></select></label>
+        <label>Position
+          <select id="placement">
+            <option value="auto">Layout default</option><option value="top">Top</option>
+            <option value="center">Centre</option><option value="bottom">Bottom</option>
+          </select>
+        </label>
+      </div>
+      <label class="row">Size <input id="captionScale" type="range" min="0.5" max="1.5" step="0.05"></label>
+      <label class="row">Tilt <input id="tilt" type="range" min="-12" max="12" step="1"></label>
+    </section>
+    <section class="step" id="panelControls">
+      <h2><i>5</i> <span id="panelTitle">Panel 1</span></h2>
+      <p class="sub">Photo in this panel</p>
+      <div id="panelPhotoPick" class="thumbs small"></div>
+      <label class="row">Zoom <input id="panelZoom" type="range" min="1" max="5" step="0.05"></label>
+      <div class="buttons">
+        <button id="resetCrop" class="ghost" type="button">Reset crop</button>
+        <button id="fillAll" class="ghost" type="button">Use in every panel</button>
+        <button id="autoArrange" class="ghost" type="button">Auto-arrange</button>
+      </div>
+    </section>
+    <p id="status" class="status" role="status"></p>
+  </aside>
 </main>
 <script type="module" src="./src/main.js"></script>
 </body>
